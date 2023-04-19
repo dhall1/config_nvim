@@ -1,4 +1,5 @@
 return {
-  'folke/tokyonight.nvim',
-  branch = 'main'
+	"folke/tokyonight.nvim",
+	branch = "main",
+	lazy = true,
 }

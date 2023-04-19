@@ -7,6 +7,7 @@ return {
 		options = {
 			theme = "tokyonight",
 			section_separators = { left = "", right = "" },
+			disabled_filetypes = { "NvimTree" },
 		},
 	},
 }

@@ -14,14 +14,14 @@ return {
 			desc = "Find Files",
 		},
 		{
-			"<leader>fg",
+			"<leader>/",
 			function()
 				require("telescope.builtin").live_grep()
 			end,
 			desc = "Grep Files",
 		},
 		{
-			"<leader>fb",
+			"<leader>ls",
 			function()
 				require("telescope.builtin").buffers()
 			end,

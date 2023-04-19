@@ -27,11 +27,11 @@ return {
 						return utils.root_has_file(".eslintrc.js") -- change file extension if you use something else
 					end,
 				}),
-				formatting.rustfmt.with({
+				formatting.rustfmt,--[[.with({
 					condition = function(utils)
 						return utils.root_has_file(".rustfmt.toml")
 					end,
-				}),
+				})--]]
 				diagnostics.gccdiag,
 				formatting.clang_format,
 			},
