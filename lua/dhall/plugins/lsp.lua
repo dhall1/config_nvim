@@ -70,5 +70,11 @@ return { -- LSP Configuration & Plugins
 				})
 			end,
 		})
+
+		lspconfig["ghdl_ls"].setup({
+			--capabilities = capabilities,
+			on_attach = require("dhall.on_attach"),
+			settings = servers["vhdl_ls"],
+		})
 	end,
 }

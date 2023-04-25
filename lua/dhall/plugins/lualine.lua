@@ -7,7 +7,25 @@ return {
 		options = {
 			theme = "tokyonight",
 			section_separators = { left = "", right = "" },
-			disabled_filetypes = { "NvimTree" },
+			disabled_filetypes = {
+				statusline = { "NvimTree" },
+				winbar = { "NvimTree" },
+			},
+		},
+		winbar = {
+			lualine_b = {
+				"filename",
+			},
+			lualine_c = {
+				{
+					function()
+						return require("nvim-navic").get_location()
+					end,
+					cond = function()
+						return require("nvim-navic").is_available()
+					end,
+				},
+			},
 		},
 	},
 }

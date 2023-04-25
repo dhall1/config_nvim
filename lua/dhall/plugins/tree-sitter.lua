@@ -1,5 +1,9 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	dependencies = {
+		"JoosepAlviste/nvim-ts-context-commentstring",
+	},
+	-- whenever lazy.nvim updates, call this
 	build = ":TSUpdate",
 	opts = {
 		-- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -28,6 +32,9 @@ return {
 		},
 		indent = {
 			enable = false,
+		},
+		context_commentstring = {
+			enable = true,
 		},
 	},
 }
