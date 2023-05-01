@@ -16,8 +16,6 @@ return { -- Autocompletion
 		-- friendly-snippets setup, loaded through luasnip
 		require("luasnip.loaders.from_vscode").lazy_load()
 
-		vim.o.completeopt = "menu,menuone,noselect"
-
 		cmp.setup({
 			snippet = {
 				expand = function(args)
