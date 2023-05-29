@@ -58,6 +58,10 @@ return { -- LSP Configuration & Plugins
 
 		local servers = require("dhall.servers")
 
+		vim.diagnostic.config({
+			virtual_text = false, -- turn off inline diagnostics
+		})
+
 		mason_lspconfig.setup_handlers({
 			function(server_name)
 				if server_name == "rust_analyzer" then
@@ -77,5 +81,28 @@ return { -- LSP Configuration & Plugins
 			on_attach = require("dhall.on_attach"),
 			settings = servers["vhdl_ls"],
 		})
+
+		vim.api.nvim_set_keymap(
+			"n",
+			"<Leader>dd",
+			":lua vim.diagnostic.open_float()<CR>",
+			{ noremap = true, silent = true }
+		)
+		-- Go to next diagnostic (if there are multiple on the same line, only shows
+		-- one at a time in the floating window)
+		vim.api.nvim_set_keymap(
+			"n",
+			"<Leader>dn",
+			":lua vim.diagnostic.goto_next()<CR>",
+			{ noremap = true, silent = true }
+		)
+		-- Go to prev diagnostic (if there are multiple on the same line, only shows
+		-- one at a time in the floating window)
+		vim.api.nvim_set_keymap(
+			"n",
+			"<Leader>dp",
+			":lua vim.diagnostic.goto_prev()<CR>",
+			{ noremap = true, silent = true }
+		)
 	end,
 }
