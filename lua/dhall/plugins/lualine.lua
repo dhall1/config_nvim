@@ -1,3 +1,4 @@
+-- A nicely improved status line
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
@@ -6,7 +7,7 @@ return {
 	opts = {
 		options = {
 			theme = "tokyonight",
-			section_separators = { left = "", right = "" },
+			-- section_separators = { left = "", right = "" },
 			disabled_filetypes = {
 				statusline = { "NvimTree" },
 				winbar = { "NvimTree" },

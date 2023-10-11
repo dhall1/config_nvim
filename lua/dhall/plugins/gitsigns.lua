@@ -1,3 +1,4 @@
+-- Mostly just doing this one to have git blames at the end of lines.
 return {
 	"lewis6991/gitsigns.nvim",
 	opts = {

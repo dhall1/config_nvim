@@ -3,25 +3,18 @@ return {
 	dependencies = {
 		"JoosepAlviste/nvim-ts-context-commentstring",
 	},
-	-- whenever lazy.nvim updates, call this
 	build = ":TSUpdate",
 	opts = {
-		-- A list of parser names, or "all" (the five listed parsers should always be installed)
+		-- Items to always have installed
 		ensure_installed = { "c", "lua", "vim", "help", "query", "cpp", "rust", "javascript", "typescript" },
 
-		-- Install parsers synchronously (only applied to `ensure_installed`)
+		-- Install parsers synchronously
 		sync_install = false,
 
 		-- Automatically install missing parsers when entering buffer
-		-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
 		auto_install = true,
 
-		-- List of parsers to ignore installing (for "all")
-		-- ignore_install = { "javascript" },
-
-		---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-		-- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
+		-- Syntax highlighting
 		highlight = {
 			enable = true,
 			-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -31,9 +24,11 @@ return {
 			additional_vim_regex_highlighting = false,
 		},
 		indent = {
-			enable = false,
+			enable = false, -- indentation based on treesitter
 		},
 		context_commentstring = {
+			-- determines the type of comment to use in files with
+			-- multiple languages (like JSX, Vue)
 			enable = true,
 		},
 	},

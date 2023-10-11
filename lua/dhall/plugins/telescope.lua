@@ -15,6 +15,7 @@ return {
 	end,
 	keys = {
 		{
+			-- search all files
 			"<leader>ff",
 			function()
 				require("telescope.builtin").find_files()
@@ -22,6 +23,7 @@ return {
 			desc = "Find Files",
 		},
 		{
+			-- search through all files
 			"<leader>/",
 			function()
 				require("telescope.builtin").live_grep()
@@ -29,6 +31,7 @@ return {
 			desc = "Grep Files",
 		},
 		{
+			-- list all buffers
 			"<leader>ls",
 			function()
 				require("telescope.builtin").buffers()
@@ -36,6 +39,7 @@ return {
 			desc = "Buffers",
 		},
 		{
+			-- search through vim's help
 			"<leader>fh",
 			function()
 				require("telescope.builtin").help_tags()

@@ -1,3 +1,4 @@
+-- Shows a preview of shortcuts
 return {
 	"folke/which-key.nvim",
 	config = function()
