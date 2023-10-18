@@ -36,4 +36,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 require("dhall.plugin-setup")
 require("dhall.keymap")
 
-vim.cmd("colorscheme tokyonight-storm")
+--vim.cmd.colorscheme("tokyonight-storm")
+vim.cmd.colorscheme("catppuccin-mocha")

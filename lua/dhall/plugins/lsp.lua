@@ -1,3 +1,25 @@
+local setup_keymaps = function()
+	local nmap = function(key, action, options)
+		vim.api.nvim_set_keymap(
+			"n",
+			key,
+			action,
+			vim.tbl_deep_extend("force", {
+				noremap = true,
+				silent = true,
+			}, options)
+		)
+	end
+	-- Show all diagnostics on the line
+	nmap("<leader>de", ":lua vim.diagnostic.open_float()<CR>", { desc = "Diagnostics - Errors" })
+	-- Go to next diagnostic (if there are multiple on the same line, only shows
+	-- one at a time in the floating window)
+	nmap("<Leader>dn", ":lua vim.diagnostic.goto_next()<CR>", { desc = "Diagnostics - Next" })
+	-- Go to prev diagnostic (if there are multiple on the same line, only shows
+	-- one at a time in the floating window)
+	nmap("<Leader>dp", ":lua vim.diagnostic.goto_prev()<CR>", { desc = "Diagnostics - Previous" })
+end
+
 return { -- LSP Configuration & Plugins
 	"neovim/nvim-lspconfig",
 	dependencies = {
@@ -6,23 +28,20 @@ return { -- LSP Configuration & Plugins
 		"williamboman/mason-lspconfig.nvim",
 
 		-- Useful status updates for LSP
-		-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 		{ "j-hui/fidget.nvim", tag = "legacy", opts = {} },
 
 		-- Additional lua configuration, makes nvim stuff amazing!
 		"folke/neodev.nvim",
-		-- show current code contexts,
-		"SmiteshP/nvim-navic",
 	},
 	config = function()
+		-- get some nice LSP features for nvim-related things
 		require("neodev").setup()
 
 		-- enable mason
 		require("mason").setup()
-
 		-- enable mason-lspconfig
 		local mason_lspconfig = require("mason-lspconfig")
-		require("mason-lspconfig").setup({
+		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
 				"tsserver",
@@ -37,19 +56,19 @@ return { -- LSP Configuration & Plugins
 			automatic_installation = true, -- not the same as ensure_installed
 		})
 
-		require("mason-null-ls").setup({
-			-- list of formatters & linters for mason to install
-			ensure_installed = {
-				"prettier", -- ts/js formatter
-				"stylua", -- lua formatter
-				"eslint_d", -- ts/js linter,
-				"rustfmt",
-				"gccdiag",
-				"clang_format",
-			},
-			-- auto-install configured formatters & linters (with null-ls)
-			automatic_installation = true,
-		})
+		-- require("mason-null-ls").setup({
+		-- 	-- list of formatters & linters for mason to install
+		-- 	ensure_installed = {
+		-- 		"prettier", -- ts/js formatter
+		-- 		"stylua", -- lua formatter
+		-- 		"eslint_d", -- ts/js linter,
+		-- 		"rustfmt",
+		-- 		"gccdiag",
+		-- 		"clang_format",
+		-- 	},
+		-- 	-- auto-install configured formatters & linters (with null-ls)
+		-- 	automatic_installation = true,
+		-- })
 
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
@@ -82,27 +101,6 @@ return { -- LSP Configuration & Plugins
 			settings = servers["vhdl_ls"],
 		})
 
-		vim.api.nvim_set_keymap(
-			"n",
-			"<Leader>dd",
-			":lua vim.diagnostic.open_float()<CR>",
-			{ noremap = true, silent = true }
-		)
-		-- Go to next diagnostic (if there are multiple on the same line, only shows
-		-- one at a time in the floating window)
-		vim.api.nvim_set_keymap(
-			"n",
-			"<Leader>dn",
-			":lua vim.diagnostic.goto_next()<CR>",
-			{ noremap = true, silent = true }
-		)
-		-- Go to prev diagnostic (if there are multiple on the same line, only shows
-		-- one at a time in the floating window)
-		vim.api.nvim_set_keymap(
-			"n",
-			"<Leader>dp",
-			":lua vim.diagnostic.goto_prev()<CR>",
-			{ noremap = true, silent = true }
-		)
+		setup_keymaps()
 	end,
 }

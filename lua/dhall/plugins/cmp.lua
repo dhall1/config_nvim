@@ -1,4 +1,5 @@
-return { -- Autocompletion
+-- Autocompletion
+return {
 	"hrsh7th/nvim-cmp",
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
@@ -33,11 +34,9 @@ return { -- Autocompletion
 				end
 			end,
 			mapping = cmp.mapping.preset.insert({
-				["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-				["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-q>"] = cmp.mapping.open_docs(),
 				["<C-d>"] = cmp.mapping.scroll_docs(-4),
 				["<C-u>"] = cmp.mapping.scroll_docs(4),
-				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-e>"] = cmp.mapping.abort(),
 				["<CR>"] = cmp.mapping({
 					i = function(fallback)
@@ -50,27 +49,9 @@ return { -- Autocompletion
 					s = cmp.mapping.confirm({ select = true }),
 					c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 				}),
-				["<S-CR>"] = cmp.mapping({
-					i = function(fallback)
-						if cmp.visible() and cmp.get_active_entry() then
-							cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-						else
-							fallback()
-						end
-					end,
-					s = cmp.mapping.confirm({ select = true }),
-					c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-				}),
 			}),
 			sources = {
-				{
-					name = "nvim_lsp",
-					-- entry_filter = function(entry)
-					-- 	-- This is supposed to get rid of Text recommendations, but it
-					-- 	-- doesn't seem to always work.
-					-- 	return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
-					-- end,
-				},
+				{ name = "nvim_lsp" },
 				{ name = "buffer" },
 				{ name = "path" },
 				{ name = "luasnip" },

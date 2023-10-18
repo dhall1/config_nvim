@@ -37,11 +37,12 @@ return function(client, bufnr)
 	end, "[W]orkspace [L]ist Folders")
 
 	-- Create a command `:Format` local to the LSP buffer
-	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-		vim.lsp.buf.format()
-	end, { desc = "Format current buffer with LSP" })
+	-- vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
+	-- 	vim.lsp.buf.format()
+	-- end, { desc = "Format current buffer with LSP" })
 
-	if client.server_capabilities.documentSymbolProvider then
-		require("nvim-navic").attach(client, bufnr)
+	local ok, nvim_navic = pcall(require, "nvim-navic")
+	if ok and client.server_capabilities.documentSymbolProvider then
+		nvim_navic.attach(client, bufnr)
 	end
 end
